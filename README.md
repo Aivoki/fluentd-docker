@@ -1,3 +1,4 @@
+```dockerfile
 FROM fluent/fluentd:v1.2
 
 RUN apk add --update --virtual .build-deps \
@@ -8,3 +9,4 @@ RUN apk add --update --virtual .build-deps \
  && apk del .build-deps \
  && rm -rf /var/cache/apk/* \
            /home/fluent/.gem/ruby/2.4.0/cache/*.gem
+```

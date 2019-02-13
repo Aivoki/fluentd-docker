@@ -369,7 +369,7 @@ data:
           time_format %d/%b/%Y:%H:%M:%S %z
         </pattern>
         <pattern>
-          # Nginx Error Log Example
+          # Nginx Error Log
           format /^(?<time>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[(?<log_level>\w+)\] (?<pid>\d+).(?<tid>\d+): (?<message>.*)/
           types pid:integer,tid:integer
           time_format %Y/%m/%d %H:%M:%S

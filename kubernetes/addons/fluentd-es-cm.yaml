@@ -6,7 +6,7 @@ metadata:
   namespace: kube-system
   labels:
     k8s-app: fluentd-es
-    kubernetes.io/minikube-addons: efk
+    version: v1.0
     addonmanager.kubernetes.io/mode: Reconcile
 data:
   0.input.containers.conf: |-
@@ -150,7 +150,7 @@ data:
     # I0204 06:55:31.872680       5 servicecontroller.go:277] LB already exists and doesn't need update for service kube-system/kube-ui
     <source>
       @type tail
-      @id in_tail_kube_controller_manager 
+      @id in_tail_kube_controller_manager
       multiline_flush_interval 5s
       path /var/log/kube-controller-manager.log
       pos_file /var/log/es-kube-controller-manager.log.pos
@@ -253,7 +253,7 @@ data:
         format1 /^(?<time>\S+) AUDIT:(?: (?:id="(?<id>(?:[^"\\]|\\.)*)"|ip="(?<ip>(?:[^"\\]|\\.)*)"|method="(?<method>(?:[^"\\]|\\.)*)"|user="(?<user>(?:[^"\\]|\\.)*)"|groups="(?<groups>(?:[^"\\]|\\.)*)"|as="(?<as>(?:[^"\\]|\\.)*)"|asgroups="(?<asgroups>(?:[^"\\]|\\.)*)"|namespace="(?<namespace>(?:[^"\\]|\\.)*)"|uri="(?<uri>(?:[^"\\]|\\.)*)"|response="(?<response>(?:[^"\\]|\\.)*)"|\w+="(?:[^"\\]|\\.)*"))*/
         time_format %Y-%m-%dT%T.%L%Z
       </parse>
-    </source>  
+    </source>
 
   0.input.systemd.conf: |-
     # Logs from systemd-journal for interesting services.
@@ -269,7 +269,7 @@ data:
       read_from_head true
       tag docker
     </source>
-    
+
     <source>
       @type systemd
       @id in_systemd_kubelet
@@ -282,7 +282,7 @@ data:
       read_from_head true
       tag kubelet
     </source>
-    
+
     <source>
       @type systemd
       @id in_systemd_node_problem_detector
@@ -369,7 +369,7 @@ data:
           time_format %d/%b/%Y:%H:%M:%S %z
         </pattern>
         <pattern>
-          # Nginx Error Log
+          # Nginx Error Log Example
           format /^(?<time>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[(?<log_level>\w+)\] (?<pid>\d+).(?<tid>\d+): (?<message>.*)/
           types pid:integer,tid:integer
           time_format %Y/%m/%d %H:%M:%S

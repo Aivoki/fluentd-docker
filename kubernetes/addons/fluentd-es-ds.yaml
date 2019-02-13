@@ -6,19 +6,18 @@ metadata:
   namespace: kube-system
   labels:
     k8s-app: fluentd-es
-    kubernetes.io/addons: efk
+    version: v1.3-debian-1-es-k8s
     addonmanager.kubernetes.io/mode: Reconcile
 spec:
   selector:
     matchLabels:
       k8s-app: fluentd-es
-      kubernetes.io/addons: efk
+      version: v1.3-debian-1-es-k8s
   template:
     metadata:
       labels:
         k8s-app: fluentd-es
-        kubernetes.io/addons: efk
-        addonmanager.kubernetes.io/mode: Reconcile
+        version: v1.3-debian-1-es-k8s
     spec:
       terminationGracePeriodSeconds: 30
       serviceAccount: fluentd
@@ -30,13 +29,13 @@ spec:
         - name: fluentd
           image: qqbuby/fluentd:v1.3-debian-1-es-k8s
           env:
-            - name: FLUENT_UID 
+            - name: FLUENT_UID
               value: "0"
             - name: FLUENTD_SYSTEMD_CONF
               value: "disable"
-            - name:  FLUENT_ELASTICSEARCH_HOST
+            - name: FLUENT_ELASTICSEARCH_HOST
               value: "elasticsearch-logging"
-            - name:  FLUENT_ELASTICSEARCH_PORT
+            - name: FLUENT_ELASTICSEARCH_PORT
               value: "9200"
             - name: FLUENT_ELASTICSEARCH_SCHEME
               value: "http"
